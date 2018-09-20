@@ -47,10 +47,16 @@ def process(in_file, out_file):
         file_data = fp.read()
 
     r = http.request('POST', UPLOAD_URL, fields={'files': (basename, file_data, mimetype)})
-    json_obj = json.loads(r.data.decode('utf-8'))
+    json_txt = r.data.decode('utf-8')
+    # with open(out_file + '.json', 'w') as fp:
+    #     fp.write(json_txt)
+    json_obj = json.loads(json_txt)
     file_id = json_obj['id']
     im = Image.open(in_file)
+    im = im.convert('RGB')
     draw = ImageDraw.Draw(im)
+
+    # ext = os.path.splitext(in_file)[1][1:]
 
     for i in range(json_obj['balloonCount']):
         ballon = json_obj[str(i)]
@@ -80,7 +86,7 @@ def process(in_file, out_file):
         x1 = x0 + target_width
         y1 = y0 + target_height
 
-        draw.rectangle([x0,y0,x1,y1],fill=(255,255,255,255))
+        draw.rectangle((x0,y0,x1,y1),fill=(255,255,255))
 
         start_x = target_x + target_width
         start_y = target_y
@@ -95,7 +101,7 @@ def process(in_file, out_file):
             ch_x = start_x - ch_w
             ch_y = start_y
             start_y += ch_h + SPACING
-            draw.text((ch_x, ch_y), ch, font=font, fill=(0,0,0,255))
+            draw.text((ch_x, ch_y), ch, font=font, fill=(0,0,0))
 
         # need_size = draw.textsize(translatedText[0], spacing=0, font=font)
         # texttodraw = translatedText
@@ -108,7 +114,7 @@ def process(in_file, out_file):
         #         texttodraw += os.linesep
         # draw.text((target_x, target_y), texttodraw, font=font, spacing=4, fill=(0,0,0,255), direction='ttb')
     
-    im.save(out_file, "png")
+    im.save(out_file)
 
 def main():
     parser = build_parser()
