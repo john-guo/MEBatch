@@ -29,5 +29,5 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 
 ## 限制  
 
-由于是自动化处理，所以完全依赖mangaEditor的识别能力，并且由于是自动化处理，因此翻译以及嵌字效果都达不到人工操作的理想程度，而且很有可能产生很糟糕的效果，这时推荐使用LabelPlus[http://noodlefighter.com/label_plus/] 来进行手工辅助汉化处理。  
+由于是自动化处理，所以完全依赖mangaEditor的识别能力，mangaEditor的识别范围是对话气泡，漫画图片上如有日文不在气泡内则极大可能无法识别。并且由于是自动化处理，因此翻译以及嵌字效果都达不到人工操作的理想程度，而且很有可能产生很糟糕的效果，这时推荐使用LabelPlus[http://noodlefighter.com/label_plus/] 来进行手工辅助汉化处理。  
 并且再次说明**本脚本极度依赖mangaEditor**
