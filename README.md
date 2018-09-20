@@ -16,7 +16,7 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 `Requirement already satisfied: pillow in c:\anaconda3_64\lib\site-packages (from -r requirements.txt (line 2)) (5.1.0)`  
 到此就算安装完毕  
   
-##使用
+##使用  
 打开anaconda prompt在脚本所在目录中运行：  
 `python mebatch.py --in-path 漫画图片全路径 --out-path 翻译后图片所要放的路径`  
   
