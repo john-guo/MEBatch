@@ -48,8 +48,6 @@ def process(in_file, out_file):
 
     r = http.request('POST', UPLOAD_URL, fields={'files': (basename, file_data, mimetype)})
     json_txt = r.data.decode('utf-8')
-    # with open(out_file + '.json', 'w') as fp:
-    #     fp.write(json_txt)
     json_obj = json.loads(json_txt)
     width = json_obj['dim']['cols']
     height = json_obj['dim']['rows']
@@ -61,8 +59,6 @@ def process(in_file, out_file):
 
     width_ratio = im.width / width
     height_ratio = im.height / height
-
-    # ext = os.path.splitext(in_file)[1][1:]
 
     for i in range(json_obj['balloonCount']):
         ballon = json_obj[str(i)]
@@ -125,18 +121,7 @@ def process(in_file, out_file):
             ch_y = start_y
             start_y += ch_h + SPACING
             draw.text((ch_x, ch_y), ch, font=font, fill=(0,0,0))
-
-        # need_size = draw.textsize(translatedText[0], spacing=0, font=font)
-        # texttodraw = translatedText
-        # if need_size > target_size:
-        #     texttodraw = ''
-        #     lines = math.ceil(need_size / target_size)
-        #     textperline = math.ceil(len(translatedText) / lines)
-        #     for j in range(lines):
-        #         texttodraw += translatedText[j*textperline:(j+1)*textperline]
-        #         texttodraw += os.linesep
-        # draw.text((target_x, target_y), texttodraw, font=font, spacing=4, fill=(0,0,0,255), direction='ttb')
-    
+  
     im.save(out_file)
 
 def main():
