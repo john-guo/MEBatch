@@ -27,3 +27,7 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 `cd C:\mebatch`  
 `python mebatch.py --in-path C:\in --out-path C:\out`  
 等执行完后就能在C:\out里找到自动汉化完成的漫画图片。
+
+## 限制  
+
+目前只实现了每个对话气泡的第一个文字区域，如果出现多文字区域，除第一个文字区域外都还未能正确处理，原因是没有具体的数据例子用来做代码测试。
