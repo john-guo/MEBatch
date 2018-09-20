@@ -14,7 +14,7 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 如果显示类似如下提示就说明没问题了  
 `Requirement already satisfied: urllib3 in c:\anaconda3_64\lib\site-packages (from -r requirements.txt (line 1)) (1.22)`  
 `Requirement already satisfied: pillow in c:\anaconda3_64\lib\site-packages (from -r requirements.txt (line 2)) (5.1.0)`  
-到此就算安装完毕  
+到此就算安装完毕。  
   
 ## 使用  
 
@@ -29,5 +29,5 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 
 ## 限制  
 
-由于是自动化处理，所以完全依赖mangaEditor的识别能力，并且由于是自动化处理，因此翻译以及嵌字效果都达不到人工操作的理想程度，而且很有可能产生很糟糕的效果，这时推荐使用LabelPlus[http://noodlefighter.com/label_plus/] 来进行手工辅助汉化处理  
+由于是自动化处理，所以完全依赖mangaEditor的识别能力，并且由于是自动化处理，因此翻译以及嵌字效果都达不到人工操作的理想程度，而且很有可能产生很糟糕的效果，这时推荐使用LabelPlus[http://noodlefighter.com/label_plus/] 来进行手工辅助汉化处理。  
 并且再次说明**本脚本极度依赖mangaEditor**
