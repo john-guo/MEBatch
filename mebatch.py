@@ -9,7 +9,7 @@ import math
 import os
 from PIL import Image, ImageFont, ImageDraw
 
-SPACING = 4
+SPACING = 2
 LINE_SPACING = 4
 UPLOAD_URL = 'https://moeka.me/mangaEditor/upload/'
 TRANSLATE_URL = 'https://moeka.me/mangaEditor/translate/'
@@ -51,10 +51,16 @@ def process(in_file, out_file):
     # with open(out_file + '.json', 'w') as fp:
     #     fp.write(json_txt)
     json_obj = json.loads(json_txt)
+    width = json_obj['dim']['cols']
+    height = json_obj['dim']['rows']
+
     file_id = json_obj['id']
     im = Image.open(in_file)
     im = im.convert('RGB')
     draw = ImageDraw.Draw(im)
+
+    width_ratio = im.width / width
+    height_ratio = im.height / height
 
     # ext = os.path.splitext(in_file)[1][1:]
 
@@ -69,28 +75,31 @@ def process(in_file, out_file):
             continue
 
         boundingRect = ballon['boundingRect']
-        textRect = ballon['textRect']['0']
         x0 = boundingRect['x']
         y0 = boundingRect['y']
         x1 = x0 + boundingRect['width']
         y1 = y0 + boundingRect['height']
 
+        textRectCount = ballon['textRectCount']
+
+        for rect in range(textRectCount):
+            textRect = ballon['textRect'][str(rect)]
+            x0 = math.floor(width_ratio * textRect['x'] + .5)
+            y0 = math.floor(height_ratio * textRect['y'] + .5)
+            x1 = x0 + math.floor(width_ratio * textRect['width'] + .5)
+            y1 = y0 + math.floor(height_ratio * textRect['height'] + .5)
+            draw.rectangle((x0,y0,x1,y1),fill=(255,255,255))
         
-        target_x = textRect['x']
-        target_y = textRect['y']
-        target_width = textRect['width']
-        target_height = textRect['height']
-
-        x0 = target_x
-        y0 = target_y
-        x1 = x0 + target_width
-        y1 = y0 + target_height
-
-        draw.rectangle((x0,y0,x1,y1),fill=(255,255,255))
-
+        currentTextRect = 0
+        textRect = ballon['textRect'][str(currentTextRect)]
+        target_x = math.floor(textRect['x'] * width_ratio + .5)
+        target_y = math.floor(textRect['y'] * height_ratio + .5)
+        target_width = math.floor(textRect['width'] * width_ratio + .5)
+        target_height = math.floor(textRect['height'] * height_ratio + .5)
         start_x = target_x + target_width
         start_y = target_y
         linemaxsize = 0
+
         for ch in translatedText:
             ch_w,ch_h = draw.textsize(ch, spacing=0, font=font)
             if linemaxsize < ch_w:
@@ -98,6 +107,20 @@ def process(in_file, out_file):
             if start_y + ch_h > target_y + target_height:
                 start_x -= linemaxsize + LINE_SPACING
                 start_y = target_y
+            
+            if start_x - ch_w < target_x:
+                currentTextRect += 1
+                if currentTextRect >= textRectCount:
+                    break
+                textRect = ballon['textRect'][str(currentTextRect)]
+                target_x = math.floor(textRect['x'] * width_ratio + .5)
+                target_y = math.floor(textRect['y'] * height_ratio + .5)
+                target_width = math.floor(textRect['width'] * width_ratio + .5)
+                target_height = math.floor(textRect['height'] * height_ratio + .5)
+                start_x = target_x + target_width
+                start_y = target_y
+                linemaxsize = ch_w
+
             ch_x = start_x - ch_w
             ch_y = start_y
             start_y += ch_h + SPACING
