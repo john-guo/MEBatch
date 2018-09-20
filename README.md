@@ -20,7 +20,7 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 打开anaconda prompt在脚本所在目录中运行：  
 `python mebatch.py --in-path 漫画图片全路径 --out-path 翻译后图片所要放的路径`  
   
-比如假设脚本所在目录是 C:\mebatch ， 漫画图片都放在 C:\in 目录下，想把翻译的图片放在 C:\out 目录下，打开Anaconda Prompt，输入如下命令:
+比如假设脚本所在目录是 C:\mebatch ， 漫画图片都放在 C:\in 目录下，想把翻译的图片放在 C:\out 目录下，打开Anaconda Prompt，输入如下命令:  
 `C:`    
 `cd C:\mebatch`  
 `python mebatch.py --in-path C:\in --out-path C:\out`  
