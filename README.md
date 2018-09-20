@@ -7,10 +7,9 @@
 ## 安装  
 
 windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Anaconda3-5.2.0-Windows-x86_64.exe]  
-安装完Anaconda后打开Anaconda Prompt, 可能Anaconda默认带的python版本较低，建议先更新python以免后面出现报错:  
-`conda upgrade python`  
-出现提示按Y即可  
-然后进入项目目录运行:  
+安装完Anaconda后启动Anaconda Prompt, 进入项目目录运行（假设项目下载在c:\mebatch):
+`c:`  
+`cd c:\mebatch`  
 `pip install -r requirements.txt`  
 如果显示类似如下提示就说明没问题了  
 `Requirement already satisfied: urllib3 in c:\anaconda3_64\lib\site-packages (from -r requirements.txt (line 1)) (1.22)`  
