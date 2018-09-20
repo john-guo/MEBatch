@@ -8,7 +8,7 @@
 
 windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Anaconda3-5.2.0-Windows-x86_64.exe]  
 安装完Anaconda后打开Anaconda Prompt, 可能Anaconda默认带的python版本较低，建议先更新python以免后面出现报错:  
-`conda upgrade pip`  
+`conda upgrade python`  
 出现提示按Y即可  
 然后进入项目目录运行:  
 `pip install -r requirements.txt`  
