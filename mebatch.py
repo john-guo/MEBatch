@@ -9,13 +9,8 @@ import math
 import os
 from PIL import Image, ImageFont, ImageDraw
 
-SPACING = 2
-LINE_SPACING = 4
 UPLOAD_URL = 'https://moeka.me/mangaEditor/upload/'
 TRANSLATE_URL = 'https://moeka.me/mangaEditor/translate/'
-font = ImageFont.truetype('simhei.ttf', 16)
-mimetypes.init()
-urllib3.disable_warnings()
 
 def list_files(in_path):
     files = []
@@ -35,6 +30,23 @@ def build_parser():
     parser.add_argument('--out-path', type=str,
                         dest='out_path', help=help_out, metavar='OUT_PATH',
                         required=True)
+    
+    parser.add_argument('--font', type=str,
+                    dest='font',help='font file name, default is simhei.ttf',
+                    metavar='FONT', default="simhei.ttf")
+
+    parser.add_argument('--font-size', type=int,
+                    dest='fontsize',help='font size, default is 16',
+                    metavar='FONTSIZE', default=16)
+
+    parser.add_argument('--font-spacing', type=int,
+                    dest='fontspacing',help='font spacing, default is 2',
+                    metavar='FONTSPACING', default=2)
+
+    parser.add_argument('--line-spacing', type=int,
+                    dest='linespacing',help='line spacing, default is 4',
+                    metavar='LINESPACING', default=4)
+
     return parser
 
 def process(in_file, out_file):
@@ -97,7 +109,7 @@ def process(in_file, out_file):
         linemaxsize = 0
 
         for ch in translatedText:
-            ch_w,ch_h = draw.textsize(ch, spacing=0, font=font)
+            ch_w,ch_h = draw.textsize(ch, spacing=0, font=FONT)
             if linemaxsize < ch_w:
                 linemaxsize = ch_w
             if start_y + ch_h > target_y + target_height:
@@ -120,13 +132,21 @@ def process(in_file, out_file):
             ch_x = start_x - ch_w
             ch_y = start_y
             start_y += ch_h + SPACING
-            draw.text((ch_x, ch_y), ch, font=font, fill=(0,0,0))
+            draw.text((ch_x, ch_y), ch, font=FONT, fill=(0,0,0))
   
     im.save(out_file)
 
 def main():
+    global FONT, SPACING, LINE_SPACING
+    mimetypes.init()
+    urllib3.disable_warnings()
+
     parser = build_parser()
     opts = parser.parse_args()    
+
+    FONT = ImageFont.truetype(opts.font, opts.fontsize)
+    SPACING = opts.fontspacing
+    LINE_SPACING = opts.linespacing
 
     files = list_files(opts.in_path)
     full_in = [os.path.join(opts.in_path,x) for x in files]
