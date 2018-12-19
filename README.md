@@ -6,6 +6,8 @@
 
 ## 安装  
 
+首先需要安装**Python3**，以及pip。
+
 windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Anaconda3-5.2.0-Windows-x86_64.exe]  
 安装完Anaconda后启动Anaconda Prompt, 进入项目目录运行（假设项目下载在c:\mebatch):  
 `c:`  
