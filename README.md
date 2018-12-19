@@ -27,6 +27,24 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 `python mebatch.py --in-path C:\in --out-path C:\out`  
 等执行完后就能在C:\out里找到自动汉化完成的漫画图片。
 
+## 额外的命令行参数
+
+--font 字体文件 
+`指定对话字体，默认是simhei.ttf，如果系统没有此默认字体需要用这个参数指定字体。`
+
+
+--font-size 字体大小
+`指定字体大小，默认是16。`
+
+
+--font-spacing 字间距
+`指定字间距，默认是2。`
+
+
+--line-spacing 行间距
+`指定行间距，默认是4。`
+
+
 ## 限制  
 
 由于是自动化处理，所以完全依赖mangaEditor的识别能力，mangaEditor的识别范围是对话气泡，漫画图片上如有日文不在气泡内则极大可能无法识别。并且由于是自动化处理，因此翻译以及嵌字效果都达不到人工操作的理想程度，而且很有可能产生很糟糕的效果，这时推荐使用LabelPlus[http://noodlefighter.com/label_plus/] 来进行手工辅助汉化处理。  
