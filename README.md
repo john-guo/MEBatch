@@ -39,8 +39,8 @@ windows新手用户推荐先安装Anaconda[https://repo.anaconda.com/archive/Ana
 `指定字体大小，默认是16。`
 
 
---font-spacing 字间距
-`指定字间距，默认是2。`
+--font-spacing 字（列）间距
+`指定字（列）间距，默认是2。`
 
 
 --line-spacing 行间距
